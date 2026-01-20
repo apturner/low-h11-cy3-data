@@ -1,4 +1,4 @@
-# Calabi-Yau Intersection Number Data
+# Calabi–Yau Intersection Number Data
 
 This repository contains the intersection numbers and second Chern class for all Calabi–Yau threefolds constructed as hypersurfaces in toric fourfolds with h^{1, 1} from 2 to 6 (see the Kreuzer–Skarke database, http://hep.itp.tuwien.ac.at/~kreuzer/CY/CYhome.html).
 
