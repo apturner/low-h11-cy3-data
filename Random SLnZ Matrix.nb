@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     10848,        278]
-NotebookOptionsPosition[     10475,        263]
-NotebookOutlinePosition[     10866,        279]
-CellTagsIndexPosition[     10823,        276]
+NotebookDataLength[     10864,        279]
+NotebookOptionsPosition[     10491,        264]
+NotebookOutlinePosition[     10882,        280]
+CellTagsIndexPosition[     10839,        277]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -96,8 +96,7 @@ Cell[BoxData[
      " ", 
      RowBox[{
      "return", " ", "the", " ", "matrix", " ", "that", " ", "reduces", " ", 
-      "it", " ", "via", " ", "to", " ", "the", " ", "LLL", " ", "algorithm", 
-      " ", 
+      "it", " ", "via", " ", "the", " ", "LLL", " ", "algorithm", " ", 
       RowBox[{"(", 
        RowBox[{
        "maintaining", " ", "the", " ", "sign", " ", "of", " ", "the", " ", 
@@ -258,8 +257,10 @@ Cell[BoxData[
    3.9779197595301228`*^9, 3.977919813441105*^9}, {3.977919851170456*^9, 
    3.977919867499559*^9}, {3.977919919006793*^9, 3.9779199440791073`*^9}, {
    3.977920348005227*^9, 3.977920446250575*^9}, {3.977920768163808*^9, 
-   3.9779208574187527`*^9}, {3.977920938806333*^9, 3.977920946016464*^9}},
- CellLabel->"In[6]:=",ExpressionUUID->"6602a08e-6149-42ea-ad09-8b153da3f624"]
+   3.9779208574187527`*^9}, {3.977920938806333*^9, 3.977920946016464*^9}, {
+   3.9779251743938913`*^9, 
+   3.97792517484828*^9}},ExpressionUUID->"6602a08e-6149-42ea-ad09-\
+8b153da3f624"]
 },
 WindowSize->{1680, 997},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -278,7 +279,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 9913, 241, 1055, "Input",ExpressionUUID->"6602a08e-6149-42ea-ad09-8b153da3f624",
+Cell[558, 20, 9929, 242, 1055, "Input",ExpressionUUID->"6602a08e-6149-42ea-ad09-8b153da3f624",
  InitializationCell->True]
 }
 ]
