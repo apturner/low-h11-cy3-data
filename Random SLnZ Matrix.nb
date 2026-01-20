@@ -1,0 +1,286 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10848,        278]
+NotebookOptionsPosition[     10475,        263]
+NotebookOutlinePosition[     10866,        279]
+CellTagsIndexPosition[     10823,        276]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Given", " ", 
+     RowBox[{"(", 
+      RowBox[{"dim", ",", " ", "R", ",", " ", "num"}], ")"}]}], ",", " ", 
+    RowBox[{
+     RowBox[{
+     "pick", " ", "num", " ", "random", " ", "points", " ", "within", " ", 
+      "the", " ", "dim"}], "-", 
+     RowBox[{"ball", " ", "of", " ", "radius", " ", "R"}]}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"pickNBall", "[", 
+     RowBox[{
+      RowBox[{"dim_Integer", "?", "Positive"}], ",", 
+      RowBox[{"R_", "?", "Positive"}], ",", 
+      RowBox[{"num_Integer", "?", "Positive"}]}], "]"}], ":=", 
+    RowBox[{"Module", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"spherePoints", "=", 
+         RowBox[{
+          RowBox[{
+           FractionBox["#", 
+            RowBox[{"Norm", "[", "#", "]"}]], "&"}], "/@", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{
+            RowBox[{"NormalDistribution", "[", "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"num", ",", "dim"}], "}"}]}], "]"}]}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"radii", "=", 
+         RowBox[{
+          RowBox[{
+           SuperscriptBox["#", 
+            RowBox[{"1", "/", "dim"}]], "&"}], "/@", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              SuperscriptBox["R", "dim"]}], "}"}], ",", "num"}], "]"}]}]}]}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Times", ",", 
+        RowBox[{"{", 
+         RowBox[{"radii", ",", "spherePoints"}], "}"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Given", " ", 
+      RowBox[{"(", 
+       RowBox[{"dim", ",", " ", "R"}], ")"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{
+      "pick", " ", "a", " ", "random", " ", "point", " ", "within", " ", 
+       "the", " ", "dim"}], "-", 
+      RowBox[{"ball", " ", "of", " ", "radius", " ", "R"}]}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pickNBall", "[", 
+     RowBox[{
+      RowBox[{"dim_Integer", "?", "Positive"}], ",", 
+      RowBox[{"R_", "?", "Positive"}]}], "]"}], ":=", 
+    RowBox[{"First", "@", 
+     RowBox[{"pickNBall", "[", 
+      RowBox[{"dim", ",", "R", ",", "1"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Given", " ", "an", " ", "integer", " ", "matrix", " ", "intMat"}], ",", 
+     " ", 
+     RowBox[{
+     "return", " ", "the", " ", "matrix", " ", "that", " ", "reduces", " ", 
+      "it", " ", "via", " ", "to", " ", "the", " ", "LLL", " ", "algorithm", 
+      " ", 
+      RowBox[{"(", 
+       RowBox[{
+       "maintaining", " ", "the", " ", "sign", " ", "of", " ", "the", " ", 
+        "determinant"}], ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"reducer", "[", "intMat_List", "]"}], ":=", 
+    RowBox[{"Module", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"reduction", "=", 
+         RowBox[{"LatticeReduce", "[", "intMat", "]"}]}], ",", 
+        "\[IndentingNewLine]", "signedReducer"}], "\[IndentingNewLine]", 
+       "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"signedReducer", "=", 
+        RowBox[{"intMat", ".", 
+         RowBox[{"Inverse", "[", "reduction", "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"signedReducer", "/", 
+        RowBox[{"Prepend", "[", 
+         RowBox[{
+          RowBox[{"ConstantArray", "[", 
+           RowBox[{"1", ",", 
+            RowBox[{
+             RowBox[{"Length", "[", "intMat", "]"}], "-", "1"}]}], "]"}], ",", 
+          RowBox[{"Det", "[", "signedReducer", "]"}]}], "]"}]}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Given", " ", 
+      RowBox[{"(", 
+       RowBox[{"dim", ",", " ", "R", ",", " ", "num"}], ")"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"pick", " ", "num", " ", "random", " ", "SL", 
+       RowBox[{"(", 
+        RowBox[{"dim", ",", " ", "\[DoubleStruckCapitalZ]"}], ")"}], " ", 
+       "matrices", " ", "with", " ", "log"}], "-", 
+      RowBox[{
+      "Frobenius", " ", "norm", " ", "bounded", " ", "by", " ", "R"}]}]}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pickSLnZ", "[", 
+     RowBox[{
+      RowBox[{"dim_Integer", "?", "Positive"}], ",", 
+      RowBox[{"R_", "?", "Positive"}], ",", 
+      RowBox[{"num_Integer", "?", "Positive"}]}], "]"}], ":=", 
+    RowBox[{"Module", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"reducers", "=", 
+         RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", "point", ",", 
+        "\[IndentingNewLine]", "rot", ",", "\[IndentingNewLine]", "intMat"}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Until", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "reducers", "]"}], "==", "num"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+            "Pick", " ", "a", " ", "random", " ", "point", " ", "in", " ", 
+             "dim"}], "-", "ball"}], ",", " ", 
+           RowBox[{
+           "which", " ", "will", " ", "define", " ", "the", " ", "singular", 
+            " ", "values", " ", "of", " ", "our", " ", "matrix"}]}], "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"point", "=", 
+           RowBox[{"Exp", "@", 
+            RowBox[{"pickNBall", "[", 
+             RowBox[{"dim", ",", 
+              RowBox[{"R", "+", 
+               SqrtBox[
+                RowBox[{"dim", " ", 
+                 RowBox[{"Log", "[", 
+                  FractionBox[
+                   RowBox[{"R", "+", "1"}], "R"], "]"}]}]]}]}], "]"}]}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "Choose", " ", "a", " ", "random", " ", "orthogonal", " ", 
+            "matrix"}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"rot", "=", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"CircularRealMatrixDistribution", "[", "dim", "]"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{
+            "Rotate", " ", "the", " ", "matrix", " ", "of", " ", "singular", 
+             " ", "values", " ", "by", " ", "the", " ", "orthogonal", " ", 
+             "matrix"}], ",", " ", 
+            RowBox[{
+            "then", " ", "round", " ", "to", " ", "an", " ", "integer", " ", 
+             "matrix"}]}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"intMat", "=", 
+           RowBox[{"Round", "[", 
+            RowBox[{
+             RowBox[{"Transpose", "[", "rot", "]"}], ".", 
+             RowBox[{"DiagonalMatrix", "[", "point", "]"}], ".", "rot"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{
+            "If", " ", "the", " ", "determinant", " ", "of", " ", "the", " ", 
+             "matrix", " ", "is", " ", "nonzero"}], ",", " ", 
+            RowBox[{
+            "then", " ", "find", " ", "the", " ", "matrix", " ", "that", " ", 
+             "LLL", " ", "reduces", " ", "it", " ", "to", " ", "the", " ", 
+             "fundamental", " ", "domain"}]}], "*)"}], "\[IndentingNewLine]", 
+          
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Det", "[", "intMat", "]"}], "!=", "0"}], ",", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"reducers", ",", 
+              RowBox[{"reducer", "[", "intMat", "]"}]}], "]"}]}], "]"}]}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       "reducers"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+   
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Given", " ", 
+      RowBox[{"(", 
+       RowBox[{"dim", ",", " ", "R"}], ")"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"pick", " ", "a", " ", "random", " ", "SL", 
+       RowBox[{"(", 
+        RowBox[{"dim", ",", " ", "\[DoubleStruckCapitalZ]"}], ")"}], " ", 
+       "matrix", " ", "with", " ", "log"}], "-", 
+      RowBox[{
+      "Frobenius", " ", "norm", " ", "bounded", " ", "by", " ", "R"}]}]}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pickSLnZ", "[", 
+     RowBox[{
+      RowBox[{"dim_Integer", "?", "Positive"}], ",", 
+      RowBox[{"R_", "?", "Positive"}]}], "]"}], ":=", 
+    RowBox[{"First", "@", 
+     RowBox[{"pickSLnZ", "[", 
+      RowBox[{"dim", ",", "R", ",", "1"}], "]"}]}]}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.962959996917794*^9, 3.9629600665765877`*^9}, {
+   3.9629601497983227`*^9, 3.962960152536004*^9}, 3.962960382031941*^9, {
+   3.96296043619245*^9, 3.962960497722748*^9}, {3.962960542944827*^9, 
+   3.962960601916996*^9}, {3.9629606350382967`*^9, 3.962960638274723*^9}, {
+   3.962961423374696*^9, 3.9629616703491697`*^9}, {3.962961883571042*^9, 
+   3.9629619406966467`*^9}, {3.9629622166574097`*^9, 3.962962232344194*^9}, {
+   3.962962286372123*^9, 3.9629623723860817`*^9}, {3.962962445060054*^9, 
+   3.962962683567387*^9}, {3.977919686291553*^9, 3.977919724237336*^9}, {
+   3.9779197595301228`*^9, 3.977919813441105*^9}, {3.977919851170456*^9, 
+   3.977919867499559*^9}, {3.977919919006793*^9, 3.9779199440791073`*^9}, {
+   3.977920348005227*^9, 3.977920446250575*^9}, {3.977920768163808*^9, 
+   3.9779208574187527`*^9}, {3.977920938806333*^9, 3.977920946016464*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"6602a08e-6149-42ea-ad09-8b153da3f624"]
+},
+WindowSize->{1680, 997},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.3 for Mac OS X ARM (64-bit) (June 3, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"38514783-9ac4-44cf-9c99-195571bebf4d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 9913, 241, 1055, "Input",ExpressionUUID->"6602a08e-6149-42ea-ad09-8b153da3f624",
+ InitializationCell->True]
+}
+]
+*)
+
